@@ -3,14 +3,16 @@ import images.APImage;
 public class Main {
     public static void main(String[] args) {
 
-        APImage image = new APImage("swan.jpg");
+        APImage image = new APImage("smokey.jpg");
         image.draw();
 
         ImageProcessor ip = new ImageProcessor(image);
-        ip.toGrayScale();
-        image.draw();
+        //ip.toGrayScale();
 
-        ip.toBW();
+        //ip.posterize(37, 86, 48, 10, 180, 14);
+        //ip.toPhotoNeg();
+        //ip.colorFilter(80, 0, 0);
+        ip.sharpen(255, 10);
         image.draw();
     }
 }
