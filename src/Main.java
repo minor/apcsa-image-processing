@@ -12,7 +12,8 @@ public class Main {
         //ip.posterize(37, 86, 48, 10, 180, 14);
         //ip.toPhotoNeg();
         //ip.colorFilter(80, 0, 0);
-        ip.sharpen(255, 10);
+        //ip.sharpen(255, 10);
+        ip.toOldFashioned();
         image.draw();
     }
 }

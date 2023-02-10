@@ -115,7 +115,7 @@ public class ImageProcessor {
                     blue = (int)(blue * 0.93);
                 }
                 p.setRed(red);
-                p.setGreen(blue);
+                p.setBlue(blue);
             }
         }
     }
