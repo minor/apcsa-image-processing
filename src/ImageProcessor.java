@@ -1,5 +1,6 @@
 import images.*;
 
+
 public class ImageProcessor {
     private APImage image;
 
@@ -95,7 +96,6 @@ public class ImageProcessor {
      */
     public void rotateImage(int angle) {
         // - 90 = left, 90 = right, 180 = flip
-
         int turns;
 
         if(angle == 90) turns = 1;
@@ -128,6 +128,10 @@ public class ImageProcessor {
     /**
      * Converts the image to an "old-fashioned" look by converting pixels
      * to grayscale and transforming them to get a sepia effect
+=======
+    /**
+     * Converts the image to an "old-fashioned" look.
+>>>>>>> 2a171547954305da845dea1638c1f90dd3d43981
      */
     public void toOldFashioned() {
         toGrayScale();
@@ -187,7 +191,6 @@ public class ImageProcessor {
                     p.setGreen(Math.min(255, green + magnitude));
                     p.setBlue(Math.min(255, blue + magnitude));
                 }
-
             }
         }
     }
@@ -203,13 +206,17 @@ public class ImageProcessor {
         for (int i = 0; i < image.getHeight(); i++) {
             // Loop through each column of the image
             for (int j = 0; j < image.getWidth(); j++) {
+
                 // gets Pixel at row and column
+                // Get the Pixel at the current row and column
                 Pixel p = image.getPixel(j, i);
 
+                // Get the red, green, and blue values of the Pixel
                 int red = Math.min(p.getRed() + r, 255);
                 int green = Math.min(p.getGreen() + g, 255);
                 int blue = Math.min(p.getBlue() + b, 255);
 
+                // Set the red, green, and blue values of the Pixel
                 p.setRed(red);
                 p.setGreen(green);
                 p.setBlue(blue);
@@ -291,10 +298,15 @@ public class ImageProcessor {
 
     /**
      * This method applies a sharpening effect to the image by analyzing the difference between a pixel and its neighbors.
+<<<<<<< HEAD
      * This method first creates a blank image to write on, before iterating through pixels of the original image.
      * If the difference between the current (original) pixel and its neighbors is less than or equal to the specified threshold,
      * then the color values of the current (blank) pixel are set to the same balue as the current (original) pixel. If
      * the threshold is exceeding, a sharpening effect is added to the current (original) pixel and copied onto the blank one.
+=======
+     * If the difference between the current pixel and its neighbors is less than or equal to the specified threshold,
+     * then the color values of the current pixel are set to the maximum color value (255).
+>>>>>>> 2a171547954305da845dea1638c1f90dd3d43981
      *
      * @param sharpness The level of sharpness to be applied to the image.
      * @param threshold The difference threshold used to determine if a pixel should be sharpened.
@@ -338,6 +350,10 @@ public class ImageProcessor {
     /**
      * This method applies a blur effect to the image by taking the average of a pixel and its neighbors and setting
      * the color values of the current pixel to that average.
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> 2a171547954305da845dea1638c1f90dd3d43981
      */
     public void blur(){
         // row
@@ -369,7 +385,6 @@ public class ImageProcessor {
      * @param factor - the factor by which the image should be shrunken.
      */
     public void shrink(int factor) {
-
         // call method once to get height and width
         int height = image.getHeight();
         int width = image.getWidth();
@@ -396,7 +411,6 @@ public class ImageProcessor {
      * @param factor - the factor by which the image should be enlarged.
      */
     public void enlarge(int factor) {
-
         // call method once to get height and width
         int height = image.getHeight();
         int width = image.getWidth();
@@ -418,7 +432,6 @@ public class ImageProcessor {
             }
             counterX = 0;
         }
-
         this.image = enlargedImage;
     }
 
