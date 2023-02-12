@@ -115,7 +115,7 @@ public class ImageProcessor {
                     blue = (int)(blue * 0.93);
                 }
                 p.setRed(red);
-                p.setBlue(blue);
+                p.setGreen(blue);
             }
         }
     }
@@ -262,9 +262,80 @@ public class ImageProcessor {
                 int blueAvg = (above.getBlue() + below.getBlue() + left.getBlue() + right.getBlue())/4;
 
                 p.setRed(redAvg);
-                p.setBlue(greenAvg);
-                p.setGreen(blueAvg);
+                p.setGreen(greenAvg);
+                p.setBlue(blueAvg);
             }
         }
+    }
+    public void blur(){
+        // row
+        for (int i = 1; i < image.getHeight()-1; i++) {
+            // column
+            for (int j = 1; j < image.getWidth()-1; j++) {
+                //                    col, row
+                Pixel p = image.getPixel(j, i);
+
+                Pixel above = image.getPixel(j, i-1);
+                Pixel below = image.getPixel(j, i+1);
+                Pixel left = image.getPixel(j-1, i);
+                Pixel right = image.getPixel(j+1, i);
+
+                int redAvg = (above.getRed() + below.getRed() + left.getRed() + right.getRed()) / 4;
+                int greenAvg = (above.getGreen() + below.getGreen() + left.getGreen() + right.getGreen()) / 4;
+                int blueAvg = (above.getBlue() + below.getBlue() + left.getBlue() + right.getBlue())/4;
+
+                p.setRed(redAvg);
+                p.setGreen(greenAvg);
+                p.setBlue(blueAvg);
+            }
+        }
+    }
+
+    public APImage shrink(int factor) {
+
+        // call method once to get height and width
+        int height = image.getHeight();
+        int width = image.getWidth();
+
+        APImage shrunkenImage = new APImage(width/factor, height/factor);
+
+        int counterY = 0;
+        int counterX = 0;
+        for (int i = 0; i < height-factor; i+= factor) {
+            counterX = 0;
+            for (int j = 1; j < width-factor; j+= factor) {
+                Pixel currentPixel = image.getPixel(j , i);
+                shrunkenImage.setPixel(counterX, counterY, currentPixel);
+                counterX++;
+            }
+            counterY++;
+        }
+        return shrunkenImage;
+    }
+    public APImage enlarge(int factor) {
+
+        // call method once to get height and width
+        int height = image.getHeight();
+        int width = image.getWidth();
+
+        APImage enlargedImage = new APImage(width * factor, height * factor);
+
+        int counterY = 0;
+        int counterX = 0;
+        for (int i = 0; counterY < height; i+= factor) {
+            for (int j = 0; counterX < width; j++) {
+                Pixel currentPixel = image.getPixel(counterX , counterY);
+                enlargedImage.setPixel(j, i, currentPixel);
+                if (j % factor == 0) {
+                    counterX++;
+                }
+            }
+            if (i % factor == 0) {
+                counterY++;
+            }
+            counterX = 0;
+        }
+
+        return enlargedImage;
     }
 }
