@@ -122,16 +122,13 @@ public class ImageProcessor {
             }
             image = turned;
         }
-
     }
 
     /**
      * Converts the image to an "old-fashioned" look by converting pixels
      * to grayscale and transforming them to get a sepia effect
-=======
     /**
      * Converts the image to an "old-fashioned" look.
->>>>>>> 2a171547954305da845dea1638c1f90dd3d43981
      */
     public void toOldFashioned() {
         toGrayScale();
@@ -242,11 +239,8 @@ public class ImageProcessor {
         int color1Avg = (r1 + g1 + b1) / 3;
         int color2Avg = (r2 + g2 + b2) / 3;
 
-        // row
         for (int i = 0; i < image.getHeight(); i++) {
-            // column
             for (int j = 0; j < image.getWidth(); j++) {
-                //                    col, row
                 Pixel p = image.getPixel(j, i);
 
                 int red = p.getRed();
@@ -298,15 +292,12 @@ public class ImageProcessor {
 
     /**
      * This method applies a sharpening effect to the image by analyzing the difference between a pixel and its neighbors.
-<<<<<<< HEAD
      * This method first creates a blank image to write on, before iterating through pixels of the original image.
      * If the difference between the current (original) pixel and its neighbors is less than or equal to the specified threshold,
      * then the color values of the current (blank) pixel are set to the same balue as the current (original) pixel. If
      * the threshold is exceeding, a sharpening effect is added to the current (original) pixel and copied onto the blank one.
-=======
      * If the difference between the current pixel and its neighbors is less than or equal to the specified threshold,
      * then the color values of the current pixel are set to the maximum color value (255).
->>>>>>> 2a171547954305da845dea1638c1f90dd3d43981
      *
      * @param sharpness The level of sharpness to be applied to the image.
      * @param threshold The difference threshold used to determine if a pixel should be sharpened.
@@ -317,11 +308,8 @@ public class ImageProcessor {
         int h = image.getHeight();
 
         APImage result = new APImage(w, h);
-        // row
         for (int i = 0; i < h-1; i++) {
-            // column
             for (int j = 1; j < w; j++) {
-                //                    col, row
                 Pixel old = image.getPixel(j, i);
                 Pixel left = image.getPixel(j-1, i);
                 Pixel bottom = image.getPixel(j, i+1);
@@ -350,10 +338,7 @@ public class ImageProcessor {
     /**
      * This method applies a blur effect to the image by taking the average of a pixel and its neighbors and setting
      * the color values of the current pixel to that average.
-<<<<<<< HEAD
-=======
      *
->>>>>>> 2a171547954305da845dea1638c1f90dd3d43981
      */
     public void blur(){
         // row
