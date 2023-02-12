@@ -1,12 +1,19 @@
 import images.*;
 
+
 public class ImageProcessor {
     private APImage image;
-
+    /**
+     * ImageProcessor class constructor.
+     *
+     * @param image The APImage object that the class will process.
+     */
     public ImageProcessor(APImage image) {
         this.image = image;
     }
-
+    /**
+     * Converts the image to black and white.
+     */
     public void toBW() {
         // row
         for (int i = 0; i < image.getHeight(); i++) {
@@ -33,7 +40,9 @@ public class ImageProcessor {
             }
         }
     }
-
+    /**
+     * Converts the image to grayscale.
+     */
     public void toGrayScale() {
         // row
         for (int i = 0; i < image.getHeight(); i++) {
@@ -53,7 +62,9 @@ public class ImageProcessor {
             }
         }
     }
-
+    /**
+     * Converts the image to grayscale using the luminance method.
+     */
     public void toLuminanceGrayScale() {
         // row
         for (int i = 0; i < image.getHeight(); i++) {
@@ -92,6 +103,9 @@ public class ImageProcessor {
 //        }
 //    }
 
+    /**
+     * Converts the image to an "old-fashioned" look.
+     */
     public void toOldFashioned() {
         toGrayScale();
         // row
@@ -119,52 +133,80 @@ public class ImageProcessor {
             }
         }
     }
-
+    /**
+     * Adjusts the brightness of the image.
+     * @param val Specifies if the image should be darkened or brightened
+     * @param magnitude Specifies the amount of adjustment to be made to the brightness
+     */
     public void toDarkOrBright(String val, int magnitude) {
-        // row
+        // Loop through each row of the image
         for (int i = 0; i < image.getHeight(); i++) {
-            // column
+            // Loop through each column of the image
             for (int j = 0; j < image.getWidth(); j++) {
-                //                    col, row
+                // Get the Pixel at the current row and column
                 Pixel p = image.getPixel(j, i);
 
+                // Get the red, green, and blue values of the Pixel
                 int red = p.getRed();
                 int green = p.getGreen();
                 int blue = p.getBlue();
 
+                // If the value is "darken", darken the Pixel
                 if (val.equals("darken")) {
                     p.setRed(Math.max(0, red - magnitude));
                     p.setGreen(Math.max(0, green - magnitude));
                     p.setBlue(Math.max(0, blue - magnitude));
-                } else if (val.equals("brighten")) {
+                }
+                // If the value is "brighten", brighten the Pixel
+                else if (val.equals("brighten")) {
                     p.setRed(Math.min(255, red + magnitude));
                     p.setGreen(Math.min(255, green + magnitude));
                     p.setBlue(Math.min(255, blue + magnitude));
                 }
-
             }
         }
     }
 
+    /**
+     * Applies a color filter to the image
+     * @param r The amount to adjust the red value of each Pixel
+     * @param g The amount to adjust the green value of each Pixel
+     * @param b The amount to adjust the blue value of each Pixel
+     */
     public void colorFilter(int r, int g, int b){
-        // row
+        // Loop through each row of the image
         for (int i = 0; i < image.getHeight(); i++) {
-            // column
+            // Loop through each column of the image
             for (int j = 0; j < image.getWidth(); j++) {
-                //                    col, row
+                // Get the Pixel at the current row and column
                 Pixel p = image.getPixel(j, i);
 
+                // Get the red, green, and blue values of the Pixel
                 int red = Math.min(p.getRed() + r, 255);
                 int green = Math.min(p.getGreen() + g, 255);
                 int blue = Math.min(p.getBlue() + b, 255);
 
+                // Set the red, green, and blue values of the Pixel
                 p.setRed(red);
                 p.setGreen(green);
                 p.setBlue(blue);
             }
         }
     }
-
+    /**
+     * This method takes in two sets of RGB values and performs a posterization effect on an image.
+     * The average RGB values of the two sets of RGB values are calculated, and for each pixel in the image,
+     * its average RGB value is compared to the average RGB values of the two sets of RGB values.
+     * If the pixel's average RGB value is closer to the first set of RGB values, the pixel is set to that value,
+     * otherwise it is set to the second set of RGB values.
+     *
+     * @param r1 Red value of the first set of RGB values
+     * @param g1 Green value of the first set of RGB values
+     * @param b1 Blue value of the first set of RGB values
+     * @param r2 Red value of the second set of RGB values
+     * @param g2 Green value of the second set of RGB values
+     * @param b2 Blue value of the second set of RGB values
+     */
     public void posterize(int r1, int g1, int b1, int r2, int g2, int b2){
         int color1Avg = (r1 + g1 + b1) / 3;
         int color2Avg = (r2 + g2 + b2) / 3;
@@ -198,6 +240,11 @@ public class ImageProcessor {
         }
     }
 
+    /**
+     * This method converts the image to its photo negative.
+     * The method first calls the toGrayScale method, which converts the image to grayscale,
+     * then it inverts the RGB values of each pixel, by subtracting it from 255.
+     */
     public void toPhotoNeg(){
         toGrayScale();
         // row
@@ -218,8 +265,15 @@ public class ImageProcessor {
         }
     }
 
+    /**
+     * This method applies a sharpening effect to the image by analyzing the difference between a pixel and its neighbors.
+     * If the difference between the current pixel and its neighbors is less than or equal to the specified threshold,
+     * then the color values of the current pixel are set to the maximum color value (255).
+     *
+     * @param sharpness The level of sharpness to be applied to the image.
+     * @param threshold The difference threshold used to determine if a pixel should be sharpened.
+     */
     public void sharpen(int sharpness, int threshold){
-
         APImage copy = new APImage(image.getName());
         // row
         for (int i = 0; i < image.getHeight()-1; i++) {
@@ -244,6 +298,11 @@ public class ImageProcessor {
         }
     }
 
+    /**
+     * This method applies a blur effect to the image by taking the average of a pixel and its neighbors and setting
+     * the color values of the current pixel to that average.
+     *
+     */
     public void blur(){
         // row
         for (int i = 1; i < image.getHeight()-1; i++) {
@@ -267,30 +326,13 @@ public class ImageProcessor {
             }
         }
     }
-    public void blur(){
-        // row
-        for (int i = 1; i < image.getHeight()-1; i++) {
-            // column
-            for (int j = 1; j < image.getWidth()-1; j++) {
-                //                    col, row
-                Pixel p = image.getPixel(j, i);
 
-                Pixel above = image.getPixel(j, i-1);
-                Pixel below = image.getPixel(j, i+1);
-                Pixel left = image.getPixel(j-1, i);
-                Pixel right = image.getPixel(j+1, i);
-
-                int redAvg = (above.getRed() + below.getRed() + left.getRed() + right.getRed()) / 4;
-                int greenAvg = (above.getGreen() + below.getGreen() + left.getGreen() + right.getGreen()) / 4;
-                int blueAvg = (above.getBlue() + below.getBlue() + left.getBlue() + right.getBlue())/4;
-
-                p.setRed(redAvg);
-                p.setGreen(greenAvg);
-                p.setBlue(blueAvg);
-            }
-        }
-    }
-
+    /**
+     * Shrinks an APImage object by a given factor.
+     *
+     * @param factor - the factor by which the image should be shrunken.
+     * @return the shrunken APImage object
+     */
     public APImage shrink(int factor) {
 
         // call method once to get height and width
@@ -312,6 +354,13 @@ public class ImageProcessor {
         }
         return shrunkenImage;
     }
+
+    /**
+     * Enlarges an APImage object by a given factor.
+     *
+     * @param factor - the factor by which the image should be enlarged.
+     * @return the enlarged APImage object
+     */
     public APImage enlarge(int factor) {
 
         // call method once to get height and width
