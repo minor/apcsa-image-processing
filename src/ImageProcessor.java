@@ -91,16 +91,10 @@ public class ImageProcessor {
 
     /**
      * turns the image counterclockwise by a specified angle
-     * @param angle How the far the image is turned (counterclockwise)
-     * precondition: angle is 90 (left), 180 (flip), -90 (right)
+     * @param turns How many counterclockwise turns the image will make
+     * precondition: turns is 1 (left), 2 (flip), or 3 (right)
      */
-    public void rotateImage(int angle) {
-        // - 90 = left, 90 = right, 180 = flip
-        int turns;
-
-        if(angle == 90) turns = 1;
-        else if(angle == 180) turns = 2;
-        else turns = 3;
+    public void rotateImage(int turns) {
 
         for(int t = 0; t < turns; t++){
 
