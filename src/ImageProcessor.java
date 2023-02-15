@@ -15,6 +15,7 @@ public class ImageProcessor {
 
     /**
      * Converts the image to black and white.
+     * @author Suhas
      */
     public void toBW() {
         // row
@@ -45,6 +46,7 @@ public class ImageProcessor {
 
     /**
      * Converts the image to grayscale.
+     * @author Tejas
      */
     public void toGrayScale() {
         // row
@@ -68,6 +70,7 @@ public class ImageProcessor {
 
     /**
      * Converts the image to grayscale using the luminance method.
+     * @author Tejas
      */
     public void toLuminanceGrayScale() {
         // row
@@ -93,6 +96,7 @@ public class ImageProcessor {
      * turns the image counterclockwise by a specified angle
      * @param turns How many counterclockwise turns the image will make
      * precondition: turns is 1 (left), 2 (flip), or 3 (right)
+     * @author Saurish
      */
     public void rotateImage(int turns) {
 
@@ -119,10 +123,8 @@ public class ImageProcessor {
     }
 
     /**
-     * Converts the image to an "old-fashioned" look by converting pixels
-     * to grayscale and transforming them to get a sepia effect
-    /**
      * Converts the image to an "old-fashioned" look.
+     * @author Saurish, Amogh
      */
     public void toOldFashioned() {
         toGrayScale();
@@ -156,6 +158,7 @@ public class ImageProcessor {
      * Adjusts the brightness of the image.
      * @param val Specifies if the image should be darkened or brightened
      * @param magnitude Specifies the amount of adjustment to be made to the brightness
+     * @author Amogh
      */
     public void toDarkOrBright(String val, int magnitude) {
         // Loop through each row of the image
@@ -191,6 +194,7 @@ public class ImageProcessor {
      * @param r The amount to adjust the red value of each Pixel
      * @param g The amount to adjust the green value of each Pixel
      * @param b The amount to adjust the blue value of each Pixel
+     * @author Amogh
      */
     public void colorFilter(int r, int g, int b){
         // Loop through each row of the image
@@ -217,10 +221,6 @@ public class ImageProcessor {
 
     /**
      * This method takes in two sets of RGB values and performs a posterization effect on an image.
-     * The average RGB values of the two sets of RGB values are calculated, and for each pixel in the image,
-     * its average RGB value is compared to the average RGB values of the two sets of RGB values.
-     * If the pixel's average RGB value is closer to the first set of RGB values, the pixel is set to that value,
-     * otherwise it is set to the second set of RGB values.
      *
      * @param r1 Red value of the first set of RGB values
      * @param g1 Green value of the first set of RGB values
@@ -228,6 +228,7 @@ public class ImageProcessor {
      * @param r2 Red value of the second set of RGB values
      * @param g2 Green value of the second set of RGB values
      * @param b2 Blue value of the second set of RGB values
+     * @author Saurish, Amogh
      */
     public void posterize(int r1, int g1, int b1, int r2, int g2, int b2){
         int color1Avg = (r1 + g1 + b1) / 3;
@@ -263,6 +264,7 @@ public class ImageProcessor {
      * This method converts the image to its photo negative.
      * The method first calls the toGrayScale method, which converts the image to grayscale,
      * then it inverts the RGB values of each pixel, by subtracting it from 255.
+     * @author Suhas, Tejas
      */
     public void toPhotoNeg(){
         toGrayScale();
@@ -286,15 +288,10 @@ public class ImageProcessor {
 
     /**
      * This method applies a sharpening effect to the image by analyzing the difference between a pixel and its neighbors.
-     * This method first creates a blank image to write on, before iterating through pixels of the original image.
-     * If the difference between the current (original) pixel and its neighbors is less than or equal to the specified threshold,
-     * then the color values of the current (blank) pixel are set to the same balue as the current (original) pixel. If
-     * the threshold is exceeding, a sharpening effect is added to the current (original) pixel and copied onto the blank one.
-     * If the difference between the current pixel and its neighbors is less than or equal to the specified threshold,
-     * then the color values of the current pixel are set to the maximum color value (255).
      *
      * @param sharpness The level of sharpness to be applied to the image.
      * @param threshold The difference threshold used to determine if a pixel should be sharpened.
+     * @author Amogh, Tejas, Suhas
      */
     public void sharpen(int sharpness, int threshold){
 
@@ -332,6 +329,7 @@ public class ImageProcessor {
     /**
      * This method applies a blur effect to the image by taking the average of a pixel and its neighbors and setting
      * the color values of the current pixel to that average.
+     * @author Amogh
      *
      */
     public void blur(){
@@ -362,6 +360,7 @@ public class ImageProcessor {
      * Shrinks an APImage object by a given factor.
      *
      * @param factor - the factor by which the image should be shrunken.
+     * @author Amogh, Saurish
      */
     public void shrink(int factor) {
         // call method once to get height and width
@@ -388,6 +387,7 @@ public class ImageProcessor {
      * Enlarges an APImage object by a given factor.
      *
      * @param factor - the factor by which the image should be enlarged.
+     * @author Amogh, Saurish
      */
     public void enlarge(int factor) {
         // call method once to get height and width
